@@ -560,11 +560,11 @@ body.modal-open{overflow:hidden}
 .bx-offer .bx-title{color:#f7f4ed}.bx-offer .bx-title em{color:#D3242A}
 .bx-offer-head{align-items:end;margin-bottom:45px}
 .bx-offer-head>p{font:400 18px/1.65 var(--serif);color:#c1b6ad;margin:0}
-.bx-offer-next-arrow{height:38px;width:28px;margin:34px auto -76px;display:flex;justify-content:center;position:relative;color:#168a4b;animation:bx-offer-arrow-bounce 1.8s ease-in-out infinite;}
-.bx-offer-next-arrow::before{content:'';display:block;width:2px;height:25px;background:currentColor;position:absolute;top:0;left:13px;}
-.bx-offer-next-arrow::after{content:'';display:block;width:12px;height:12px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);position:absolute;left:7px;top:16px;}
-@keyframes bx-offer-arrow-bounce{0%,100%{transform:translateY(0);opacity:.72}50%{transform:translateY(8px);opacity:1}}
-@media(prefers-reduced-motion:reduce){.bx-offer-next-arrow{animation:none}}
+.bx-offer-next-arrow{width:48px;height:48px;margin:41px auto -89px;display:grid;place-items:center;border:1px solid rgba(241,236,230,.32);border-radius:50%;color:#F1ECE6;}
+.bx-offer-next-arrow svg{width:18px;height:22px;display:block;animation:bx-offer-arrow-bounce 1.8s ease-in-out infinite;}
+@keyframes bx-offer-arrow-bounce{0%,100%{transform:translateY(-3px);opacity:.7}50%{transform:translateY(3px);opacity:1}}
+@media(max-width:600px){.bx-offer-next-arrow{margin:36px auto -37px}}
+@media(prefers-reduced-motion:reduce){.bx-offer-next-arrow svg{animation:none}}
 .bx-purchase-layout{display:grid;grid-template-columns:1fr .62fr;gap:75px;align-items:stretch}
 .bx-included{border-top:1px solid #786c66;padding-top:25px}
 .bx-included h3{font-size:11px;letter-spacing:.19em;margin:0 0 13px;color:#D3242A}
@@ -927,6 +927,83 @@ strong,b{font-weight:600}
   .bx-hero .hero-copy>.bx-micro{margin-bottom:52px!important;}
 }
 </style>
+<style>
+/* === Ajustes de conversão (nov/2026): CTAs intermediários, garantia, contador e legibilidade === */
+.cv-cta{background:#0B0B0B;color:#f7f3ed;padding:34px 0;border-top:1px solid #ffffff14;border-bottom:1px solid #ffffff14}
+.cv-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:28px}
+.cv-cta-text{margin:0;font-family:var(--sans);font-size:15px;line-height:1.55;color:#d9d2c9}
+.cv-cta-text strong{display:block;font-family:var(--serif);font-weight:500;font-size:24px;line-height:1.2;color:#fff;margin-bottom:6px}
+.cv-cta .btn{flex:0 0 auto;margin:0;white-space:nowrap}
+.cv-guarantee{display:flex;align-items:center;gap:10px;margin:14px 0 0;padding:12px 14px;border:1px solid #168a4b;background:#168a4b14;font-family:var(--sans);font-size:14px!important;line-height:1.4!important;color:#1d1a17!important;text-align:left}
+.cv-guarantee span,.cv-guarantee strong{color:#1d1a17!important;font-size:14px!important}
+.cv-guarantee b{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:#168a4b;color:#fff;font-size:14px}
+#oferta .bx-purchase-card p.cv-countdown{margin:8px 0 14px!important;font-family:var(--sans);font-size:13px!important;font-weight:600;letter-spacing:.04em;color:#1d1a17!important}
+.cv-countdown[hidden]{display:none}
+.bx-mobile-sticky-cta small{font:inherit;font-weight:500;opacity:.9}
+/* legibilidade: textos de apoio */
+.bx-flow span,.bx-deliver-items p,.ed-credentials dd,.bx-included li,.bx-included li strong,.bx-card-help,.bx-faq-list p,.ed-path p,.bx-replay-note,.bx-mirror-intro p,.bx-head-split p,.bx-audience-layout>div>p,.bx-manifesto-layout p,.ed-founder-body p,.bx-cost-layout p,.bx-flow-foot{font-size:15px!important;line-height:1.6!important}
+.bx-hero-body,.bx-hero-body strong{font-size:14px!important}
+.bx-ticket-content small,.bx-note,.bx-map-paper li{font-size:13px!important;line-height:1.5!important}
+.bx-micro,.bx-security,.bx-price-small{font-size:12px!important;line-height:1.5!important}
+.bx-price-small,.bx-security,.bx-card-help,.bx-ticket-content small{color:#3d3833!important}
+@media (max-width:700px){
+ .cv-cta{padding:28px 0}
+ .cv-cta-inner{flex-direction:column;align-items:stretch;gap:18px}
+ .cv-cta .btn{width:100%;justify-content:center;white-space:normal;text-align:center}
+ .cv-cta-text strong{font-size:22px}
+}
+</style>
+<style id="mx-motion">
+/* Camada de movimento (mx): entrada do hero, revelação ao rolar, microinterações.
+   Tudo é progressivo: sem JS ou com "reduzir movimento" a página fica como antes. */
+@keyframes mx-rise{from{opacity:0;transform:translate3d(0,24px,0)}}
+@keyframes mx-slide{from{transform:translate3d(0,18px,0)}}
+@keyframes mx-fade{from{opacity:0}}
+@keyframes mx-modal{from{opacity:0;transform:translate3d(0,16px,0) scale(.985)}}
+@keyframes mx-pop{0%{transform:scale(.94);opacity:.4}60%{transform:scale(1.03)}100%{transform:none;opacity:1}}
+.mx-progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:70;background:#C8151B;transform:scaleX(0);transform-origin:0 50%;pointer-events:none;will-change:transform}
+body.mx-cta-visible .bx-mobile-sticky{transform:translateY(120%);opacity:0;pointer-events:none}
+.bx-faq-list summary:after{display:inline-block;flex:0 0 auto}
+@media(prefers-reduced-motion:no-preference){
+ /* Hero: entra em sequência; a foto não é animada e o título não usa opacidade, para não atrasar a primeira pintura */
+ .bx-hero .hero-copy>*{animation:mx-rise .8s cubic-bezier(.2,.7,.2,1) both}
+ .bx-hero .hero-copy>h1{animation-name:mx-slide}
+ .bx-hero .hero-copy>:nth-child(2){animation-delay:.05s}
+ .bx-hero .hero-copy>:nth-child(3){animation-delay:.14s}
+ .bx-hero .hero-copy>:nth-child(4){animation-delay:.22s}
+ .bx-hero .hero-copy>:nth-child(5){animation-delay:.3s}
+ .bx-hero .hero-copy>:nth-child(6){animation-delay:.38s}
+ .bx-hero .hero-copy>:nth-child(n+7){animation-delay:.46s}
+ /* Revelação ao rolar (o JS só marca o que está abaixo da dobra) */
+ html.mx [data-mx]:not(.mx-in){opacity:0}
+ html.mx [data-mx].mx-in{animation:mx-rise .75s cubic-bezier(.2,.7,.2,1) both;animation-delay:var(--mx-d,0ms)}
+ /* Botões */
+ .btn,.bx-btn,.submit,.bx-mobile-sticky-cta{transition:background-color .25s ease,border-color .25s ease,transform .25s cubic-bezier(.2,.7,.2,1),box-shadow .25s ease}
+ .bx-btn>span,.bx-mobile-sticky-cta>b,.bx-text-link>span{display:inline-block;transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+ .btn:active,.bx-btn:active,.submit:active,.bx-mobile-sticky-cta:active{transform:scale(.985)}
+ /* FAQ */
+ .bx-faq-list summary{transition:color .2s ease}
+ .bx-faq-list summary:after{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+ .bx-faq-list details[open] summary:after{transform:rotate(180deg)}
+ .bx-faq-list details[open]>p{animation:mx-rise .4s cubic-bezier(.2,.7,.2,1) both}
+ /* Modal e ingresso */
+ .lead-modal[open]{animation:mx-modal .34s cubic-bezier(.2,.7,.2,1) both}
+ .lead-modal[open]::backdrop{animation:mx-fade .3s ease both}
+ .mx-pop{display:inline-block;animation:mx-pop .38s cubic-bezier(.2,.7,.2,1)}
+}
+@media(prefers-reduced-motion:no-preference) and (hover:hover){
+ .btn:hover,.bx-btn:hover,.submit:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(22,138,75,.6)}
+ .btn:hover:active,.bx-btn:hover:active,.submit:hover:active{transform:scale(.985);box-shadow:none}
+ .bx-btn:hover>span,.bx-text-link:hover>span{transform:translateX(5px)}
+ .bx-faq-list summary:hover{color:#C8151B}
+}
+@supports (interpolate-size:allow-keywords){@media(prefers-reduced-motion:no-preference){
+ .bx-faq-list details{interpolate-size:allow-keywords}
+ .bx-faq-list details::details-content{block-size:0;overflow:hidden;transition:block-size .38s cubic-bezier(.2,.7,.2,1),content-visibility .38s allow-discrete}
+ .bx-faq-list details[open]::details-content{block-size:auto}
+}}
+@media print{[data-mx]{opacity:1!important;animation:none!important}.mx-progress{display:none}}
+</style>
 </head>
 <body><a class="skip-link" href="#heroTitle" id="skipToContent">Ir para o conteúdo principal</a>
 <div class="event-strip" role="note"><div class="wrap event-strip-inner"><span><b>23 NOV · 2026</b>   MASTERCLASS AO VIVO E ONLINE · 20H15</span><span>A ÚNICA EDIÇÃO AO VIVO DESTE ANO</span></div></div><header class="masthead"><div class="wrap masthead-row">
@@ -962,6 +1039,7 @@ strong,b{font-weight:600}
 </div>
 <p class="bx-editorial-conclusion">O problema não é que você sabe pouco. <em>É que tudo o que você sabe ainda não trabalha junto.</em></p>
 </div></section>
+<div class="cv-cta"><div class="wrap cv-cta-inner"><p class="cv-cta-text"><strong>Masterclass Arquitetura do Sucesso™</strong>23 de novembro · 20h15 · ao vivo e online · a partir de R$ 97 · garantia de 7 dias</p><a class="btn bx-btn" href="#oferta">Garantir minha vaga <span aria-hidden="true">→</span></a></div></div>
 <section aria-labelledby="manifestoTitle" class="bx-section bx-manifesto"><div class="wrap bx-manifesto-layout"><div><div class="bx-section-label bx-label-light"><span>02 / A NOVA PERSPECTIVA</span></div><h2 class="bx-title" id="manifestoTitle">Esta masterclass não é <em>mais uma aula de marketing ou de gestão.</em></h2><p>A maioria das empresárias tenta destravar o próximo passo da empresa fazendo mais: mais cursos, mais preparo, mais horas de trabalho. E é exatamente por isso que as decisões continuam paradas. Uma decisão que não está travada por falta de informação não se resolve com mais informação.</p><p>Talento sem diferenciação pode se tornar commodity. Experiência sem uma tese própria vira currículo. Autoridade sem modelo econômico vira visibilidade. E crescimento sem liberdade pode se transformar em outra prisão.</p><p><strong>O Beyond conecta as peças que o mercado ensina separadas.</strong></p></div><div class="bx-manifesto-quote"><img alt="" aria-hidden="true" class="bx-bmark" src="/assets/asset-07.webp" width="415" height="296"/><blockquote>Você é o ativo.<br/>Sua trajetória é o repertório.<br/><em>Seu negócio precisa ser a arquitetura.</em></blockquote><span>IDENTIDADE · NEGÓCIO · AUTORIDADE · VIDA</span></div></div></section>
 <section aria-labelledby="methodTitle" class="bx-section bx-method" id="metodo"><div class="wrap">
 <div class="bx-section-label"><span>03 / O DIFERENCIAL DO MÉTODO</span><span>SELF ARCHITECTURE™</span></div>
@@ -976,12 +1054,12 @@ strong,b{font-weight:600}
 </div>
 <p class="bx-flow-foot">Na masterclass, você começa a desenhar essa direção. A implementação completa é um trabalho de construção não uma promessa de transformação instantânea em três horas.</p>
 </div></section>
-<section aria-labelledby="costTitle" class="bx-section bx-cost"><div class="wrap bx-cost-layout"><div class="bx-cost-year">2027<span>não começa em janeiro.</span></div><div><div class="bx-section-label"><span>O CUSTO DE CONTINUAR IGUAL</span></div><h2 class="bx-title" id="costTitle">O calendário vai mudar.<em>Seu negócio não muda sozinho.</em></h2><p>Você pode iniciar 2027 com mais experiência, mais responsabilidades e os mesmos problemas de preço, posicionamento, captação e sobrecarga.</p><p>Ou pode usar o que resta de 2026 para tomar as primeiras decisões que aproximam sua capacidade do reconhecimento, do lucro e da vida que deseja.</p><a class="bx-text-link" href="#oferta">Veja o que você vai construir em 23 de novembro <span aria-hidden="true">→</span></a></div></div></section>
+<section aria-labelledby="costTitle" class="bx-section bx-cost"><div class="wrap bx-cost-layout"><div class="bx-cost-year">2027<span>não começa em janeiro.</span></div><div><div class="bx-section-label"><span>O CUSTO DE CONTINUAR IGUAL</span></div><h2 class="bx-title" id="costTitle">O calendário vai mudar.<em>Seu negócio não muda sozinho.</em></h2><p>Você pode iniciar 2027 com mais experiência, mais responsabilidades e os mesmos problemas de preço, posicionamento, captação e sobrecarga.</p><p>Ou pode usar o que resta de 2026 para tomar as primeiras decisões que aproximam sua capacidade do reconhecimento, do lucro e da vida que deseja.</p><a class="bx-text-link" href="#experiencia">Veja o que você vai construir em 23 de novembro <span aria-hidden="true">→</span></a></div></div></section>
 <section aria-labelledby="deliverTitle" class="bx-section bx-deliver" id="experiencia"><div class="wrap"><div class="bx-section-label"><span>04 / A ENTREGA DA MASTERCLASS</span><span>PLANO PRÁTICO</span></div>
 <div class="bx-two-up bx-head-split"><h2 class="bx-title" id="deliverTitle">O que você vai levar<em>para o próximo passo.</em></h2><div><p class="bx-lead">Você vai trabalhar no seu próprio negócio, com o workbook aberto e orientação passo a passo. Ao final, reunirá suas descobertas no <strong>Mapa de Arquitetura 2027™</strong>.</p><p>Não são apenas reflexões. São hipóteses estratégicas e ações concretas para testar nos dias seguintes.</p></div></div>
 <div class="bx-deliver-layout"><div class="bx-deliver-items"><article><span>01 / COLOCAR NO PAPEL</span><h3>As 3 decisões</h3><p>As decisões que estão segurando o próximo passo da sua empresa e o custo de cada uma para a empresa e para a sua vida.</p></article><article><span>02 / ENTENDER</span><h3>O que faz você adiar</h3><p>Por que isso não tem nada a ver com falta de capacidade.</p></article><article><span>03 / DESCOBRIR</span><h3>O que destrava o resto</h3><p>Qual das três decisões vem primeiro e por onde começar.</p></article><article><span>04 / DEFINIR</span><h3>Pelo que ser reconhecida</h3><p>Do seu jeito, no seu tempo e sem abrir mão da sua vida.</p></article><article><span>05 / DECIDIR</span><h3>Seu plano de 7 dias</h3><p>A primeira decisão e os próximos movimentos para começar.</p></article></div><div class="bx-map-shell"><div class="bx-map-paper"><small>BEYOND CIRCLE · FERRAMENTA DE TRABALHO</small><div class="bx-map-monogram">(B)</div><h3>MAPA DE<br/>ARQUITETURA <em>2027</em></h3><p>Minha potência. Minha posição. Meu próximo negócio.</p><ol><li>Meu valor que ainda não virou reconhecimento</li><li>Minha tese e posição hipótese inicial</li><li>Meu maior vazamento de resultado</li><li>Minha prioridade de mudança</li><li>Minha primeira decisão e meu plano dos próximos 7 dias</li></ol><div class="bx-map-signature">O futuro começa com direção.</div></div><div class="bx-map-caption">Seu entregável central preenchido por você durante a masterclass.</div></div></div>
 </div></section>
-<section aria-labelledby="journeyTitle" class="bx-section bx-journey"><div class="wrap"><div class="bx-section-label bx-label-light"><span>05 / A EXPERIÊNCIA AO VIVO</span><span>3 HORAS · 4 MOVIMENTOS</span></div><h2 class="bx-title" id="journeyTitle">Durante as 3 horas ao vivo.<em>Clareza para começar.</em></h2><div class="bx-journey-grid"><div><span>01</span><h3>IDENTIFICAR</h3><p>Coloque no papel as três decisões que estão esperando.</p></div><div><span>02</span><h3>ENTENDER</h3><p>Veja o que realmente faz você adiar, sem se transformar em cobrança.</p></div><div><span>03</span><h3>DESTRAVAR</h3><p>Descubra qual decisão destrava as outras.</p></div><div><span>04</span><h3>COMEÇAR</h3><p>Saia com o plano para tomar a primeira decisão nos próximos 7 dias.</p></div></div><p class="bx-journey-end">Você não precisa esperar 2027 para começar a construir o próximo capítulo da sua vida.</p></div></section>
+<div class="cv-cta"><div class="wrap cv-cta-inner"><p class="cv-cta-text"><strong>3 horas ao vivo com Barbara Bacchi</strong>23 de novembro · 20h15 · ao vivo e online · a partir de R$ 97 · garantia de 7 dias</p><a class="btn bx-btn" href="#oferta">Garantir minha vaga <span aria-hidden="true">→</span></a></div></div>
 <section aria-labelledby="audienceTitle" class="bx-section bx-audience"><div class="wrap bx-audience-layout"><div><div class="bx-section-label"><span>PARA QUEM É</span></div><h2 class="bx-title" id="audienceTitle">A Masterclass Arquitetura do Sucesso é para você que</h2><p>Empresárias, profissionais e especialistas com trajetória, conhecimento, clientes ou resultados mas que sentem que o negócio ainda não traduz o próprio potencial.</p></div><div class="bx-audience-list"><div><span>✓</span><p>Já construiu uma empresa sólida, mas sente que algumas decisões importantes estão esperando há meses.</p></div><div><span>✓</span><p>Só avança quando se sente totalmente preparada e esse dia quase nunca chega.</p></div><div><span>✓</span><p>Revisa cada detalhe até ficar impecável, mesmo quando ninguém além de você perceberia a diferença.</p></div><div><span>✓</span><p>Resolve quase tudo sozinha e no controle, carregando um peso que ninguém vê.</p></div><div><span>✓</span><p>Quer ser reconhecida pelo que construiu, sem abrir mão da sua discrição, da sua vida privada e da sua paz.</p></div><div><span>✓</span><p>Quer dar o próximo passo da sua empresa com mais leveza, e com tempo para a sua família e para você.</p></div></div></div></section>
 <section aria-labelledby="founderTitle" class="ed-founder" id="barbara"><div class="wrap ed-founder-grid">
 <figure class="ed-portrait"><div class="ed-portrait-frame"><img alt="Barbara Bacchi na Avenida Paulista, em fotografia editorial em preto e branco" decoding="async" height="1200" loading="lazy" src="/assets/asset-08.webp" srcset="/assets/asset-08-520w.webp 520w, /assets/asset-08.webp 800w" sizes="(max-width:700px) 90vw, 520px" width="800"/></div>
@@ -1000,6 +1078,7 @@ strong,b{font-weight:600}
 <dl class="ed-credentials"><div><dt>Ensino</dt><dd>Professora convidada do MBA em Design de Luxo · Faculdade Roberto Miranda</dd></div><div><dt>Imprensa</dt><dd>Colunista da Glamurama e da Revista Perfil</dd></div><div><dt>Prêmios</dt><dd>Vencedora do Brasil Design Awards · 1ª brasileira indicada ao London Bar &amp; Restaurant Design Awards</dd></div><div><dt>Vida</dt><dd>Mãe · casada há 13 anos</dd></div></dl>
 <p class="ed-sign">Passei 16 anos construindo negócios. Até compreender o mais importante: você.</p>
 </div></div></section>
+<div class="cv-cta"><div class="wrap cv-cta-inner"><p class="cv-cta-text"><strong>Única edição ao vivo de 2026</strong>23 de novembro · 20h15 · ao vivo e online · a partir de R$ 97 · garantia de 7 dias</p><a class="btn bx-btn" href="#oferta">Garantir minha vaga <span aria-hidden="true">→</span></a></div></div>
 <section aria-labelledby="bridgeTitle" class="bx-section ed-bridge"><div class="wrap">
 <div class="bx-section-label"><span>A JORNADA COMPLETA</span><span>COM TRANSPARÊNCIA</span></div>
 <div class="ed-bridge-head"><h2 class="bx-title" id="bridgeTitle">A masterclass é o começo.<em>A construção continua.</em></h2>
@@ -1011,10 +1090,10 @@ strong,b{font-weight:600}
 </div>
 <p class="ed-bridge-note">As aplicações para o Beyond Founders são apresentadas ao final da masterclass. A mentoria é uma decisão independente, feita com calma, depois que você conhecer o método por dentro.</p>
 </div></section>
-<section aria-labelledby="offerTitle" class="bx-section bx-offer" id="oferta"><div class="wrap"><div class="bx-section-label bx-label-light"><span>06 / SUA INSCRIÇÃO</span><span>23 NOVEMBRO · AO VIVO E ONLINE</span></div><div class="bx-two-up bx-offer-head"><h2 class="bx-title" id="offerTitle">Uma decisão agora.<em>Uma nova direção para 2027.</em></h2><p>Você não precisa descobrir mais uma habilidade para justificar quem é. Precisa começar a organizar o que já sabe, o que entrega e o que deseja construir. A masterclass é o primeiro movimento dessa arquitetura.</p></div><div class="bx-purchase-layout"><div class="bx-included"><h3>SUA INSCRIÇÃO INCLUI</h3><ul><li><strong>Masterclass Arquitetura do Sucesso™</strong> encontro ao vivo de 3 horas com Barbara Bacchi.</li><li><strong>Workbook prático</strong> para trabalhar diretamente sobre a sua trajetória e o seu negócio.</li><li><strong>Self Architecture Scan™ + Ativo Invisível™</strong> ferramentas para localizar seu principal ponto de transformação.</li><li><strong>Mapa de Arquitetura 2027™</strong> valor, diferenciação, prioridade de negócio e direção desejada.</li><li><strong>Plano de ação de 7 dias</strong> três movimentos concretos para começar a testar suas decisões.</li><li><strong>7 Dias de Arquitetura do Sucesso</strong> sequência de acompanhamento pós encontro para apoiar a execução do plano.</li><li><strong>Grupo VIP da masterclass</strong> materiais e orientações de preparação.</li></ul><p class="bx-replay-note">Quer assistir novamente? O ingresso de <strong>R$ 147</strong> inclui acesso à gravação, disponibilizada em até 7 dias após o encontro.</p><p class="bx-note">A Masterclass entrega clareza, uma decisão prioritária e um plano para os próximos 7 dias. Não promete lucro ou reconhecimento automático, nem substitui a implementação de um modelo de negócio completo.</p></div><aside class="bx-purchase-card"><span class="bx-card-eyebrow" id="selectedCardEyebrow">ESCOLHA SEU INGRESSO</span><div class="bx-price">R$ <strong id="selectedPrice">97</strong></div><p class="bx-card-help" id="selectedCardHelp">Participação ao vivo, workbook, Mapa de Arquitetura 2027™ e plano de ação de 7 dias.</p><div class="bx-ticket-options"><label class="bx-ticket bx-ticket--selected"><input checked name="ticket" type="radio" value="ao_vivo"/><span class="bx-ticket-content"><span class="bx-ticket-top"><strong>Masterclass ao vivo</strong><b>R$ 97</b></span><small>23 de novembro · participação ao vivo e todos os materiais da aula.</small></span></label><label class="bx-ticket"><input name="ticket" type="radio" value="com_gravacao"/><span class="bx-ticket-content"><span class="bx-ticket-top"><strong>Ao vivo + gravação</strong><b>R$ 147</b></span><small>Inclui o ao vivo e a gravação, disponibilizada em até 7 dias após o encontro.</small></span></label></div><button aria-controls="leadModal" aria-haspopup="dialog" class="btn bx-btn bx-btn-full" data-open-lead="" type="button">Garantir minha vaga <span aria-hidden="true">→</span></button><p class="bx-security">23/11/2026 · edição única ao vivo de 2026 · pagamento na plataforma oficial</p><p class="bx-price-small">A gravação do ingresso de R$ 147 será disponibilizada em até 7 dias após a masterclass. O ingresso inclui garantia de 7 dias. O ingresso de R$ 97 não inclui a gravação.</p></aside></div><div class="bx-offer-next-arrow" aria-hidden="true"></div></div></section>
+<section aria-labelledby="offerTitle" class="bx-section bx-offer" id="oferta"><div class="wrap"><div class="bx-section-label bx-label-light"><span>05 / SUA INSCRIÇÃO</span><span>23 NOVEMBRO · AO VIVO E ONLINE</span></div><div class="bx-two-up bx-offer-head"><h2 class="bx-title" id="offerTitle">Uma decisão agora.<em>Uma nova direção para 2027.</em></h2><p>Você não precisa descobrir mais uma habilidade para justificar quem é. Precisa começar a organizar o que já sabe, o que entrega e o que deseja construir. A masterclass é o primeiro movimento dessa arquitetura.</p></div><div class="bx-purchase-layout"><div class="bx-included"><h3>SUA INSCRIÇÃO INCLUI</h3><ul><li><strong>Masterclass Arquitetura do Sucesso™</strong> encontro ao vivo de 3 horas com Barbara Bacchi.</li><li><strong>Workbook prático</strong> para trabalhar diretamente sobre a sua trajetória e o seu negócio.</li><li><strong>Self Architecture Scan™ + Ativo Invisível™</strong> ferramentas para localizar seu principal ponto de transformação.</li><li><strong>Mapa de Arquitetura 2027™</strong> valor, diferenciação, prioridade de negócio e direção desejada.</li><li><strong>Plano de ação de 7 dias</strong> três movimentos concretos para começar a testar suas decisões.</li><li><strong>7 Dias de Arquitetura do Sucesso</strong> sequência de acompanhamento pós encontro para apoiar a execução do plano.</li><li><strong>Grupo VIP da masterclass</strong> materiais e orientações de preparação.</li></ul><p class="bx-replay-note">Quer assistir novamente? O ingresso de <strong>R$ 147</strong> inclui acesso à gravação, disponibilizada em até 7 dias após o encontro.</p><p class="bx-note">A Masterclass entrega clareza, uma decisão prioritária e um plano para os próximos 7 dias. Não promete lucro ou reconhecimento automático, nem substitui a implementação de um modelo de negócio completo.</p></div><aside class="bx-purchase-card"><span class="bx-card-eyebrow" id="selectedCardEyebrow">ESCOLHA SEU INGRESSO</span><p class="cv-countdown" data-countdown hidden></p><div class="bx-price">R$ <strong id="selectedPrice">97</strong></div><p class="bx-card-help" id="selectedCardHelp">Participação ao vivo, workbook, Mapa de Arquitetura 2027™ e plano de ação de 7 dias.</p><div class="bx-ticket-options"><label class="bx-ticket bx-ticket--selected"><input checked name="ticket" type="radio" value="ao_vivo"/><span class="bx-ticket-content"><span class="bx-ticket-top"><strong>Masterclass ao vivo</strong><b>R$ 97</b></span><small>23 de novembro · participação ao vivo e todos os materiais da aula.</small></span></label><label class="bx-ticket"><input name="ticket" type="radio" value="com_gravacao"/><span class="bx-ticket-content"><span class="bx-ticket-top"><strong>Ao vivo + gravação</strong><b>R$ 147</b></span><small>Inclui o ao vivo e a gravação, disponibilizada em até 7 dias após o encontro.</small></span></label></div><button aria-controls="leadModal" aria-haspopup="dialog" class="btn bx-btn bx-btn-full" data-open-lead="" type="button">Garantir minha vaga <span aria-hidden="true">→</span></button><p class="cv-guarantee"><b aria-hidden="true">✓</b><span><strong>Garantia de 7 dias</strong> incluída na sua inscrição.</span></p><p class="bx-security">23/11/2026 · edição única ao vivo de 2026 · pagamento na plataforma oficial</p><p class="bx-price-small">A gravação do ingresso de R$ 147 será disponibilizada em até 7 dias após a masterclass. O ingresso inclui garantia de 7 dias. O ingresso de R$ 97 não inclui a gravação.</p></aside></div><div class="bx-offer-next-arrow" aria-hidden="true"><svg viewBox="0 0 18 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 1.5v19M2 13.5l7 7 7-7"/></svg></div></div></section>
 <section aria-labelledby="faqTitle" class="bx-section bx-faq" id="perguntas"><div class="wrap bx-faq-layout"><div><div class="bx-section-label"><span>PERGUNTAS FREQUENTES</span></div><h2 class="bx-title" id="faqTitle">Antes de decidir.<em>Tudo o que você precisa saber.</em></h2></div><div class="bx-faq-list"><details><summary>Quais são as diferenças entre o ingresso de R$ 97 e o de R$ 147?</summary><p>R$ 97 inclui participação ao vivo, workbook e materiais da masterclass. R$ 147 inclui tudo isso e também a gravação, que será disponibilizada em até 7 dias após o encontro. O ingresso de R$ 97 não inclui a gravação.</p></details><details><summary>Essa masterclass é mais uma aula de marketing e vendas?</summary><p>Não. É uma experiência de arquitetura de valor e negócio. Você começa pela sua trajetória, identifica sua capacidade autoral, organiza uma hipótese de diferenciação e decide o que testar na sua estrutura comercial.</p></details><details><summary>Serve para a minha profissão ou setor?</summary><p>A metodologia é aplicável a diferentes áreas. Foi desenhada especialmente para mulheres com experiência, negócio, carreira ou repertório consolidado que desejam transformar essa bagagem em maior clareza de posicionamento e valor.</p></details><details><summary>Eu já preciso ter uma empresa?</summary><p>Não necessariamente. Mas a experiência funciona melhor para quem já acumulou experiência profissional, clientes, projetos ou provas concretas e consegue aplicar as decisões a uma atividade econômica real ou planejada.</p></details><details><summary>Vou sair com minha tese, posicionamento e modelo de negócio prontos?</summary><p>Você sairá com hipóteses iniciais, um ponto prioritário de mudança e um plano para testar nos próximos 7 dias. Uma tese validada, uma categoria sólida e um modelo econômico completo exigem trabalho e validação posteriores.</p></details><details><summary>O que preciso preparar?</summary><p>Reserve aproximadamente 3 horas sem interrupções e tenha à mão exemplos de trabalhos, clientes ou projetos nos quais você gerou uma transformação real. Você trabalhará com o workbook durante a sessão.</p></details><details><summary>É realmente a única edição ao vivo de 2026?</summary><p>Sim. O encontro de 23 de novembro é a única edição ao vivo programada para 2026.</p></details><details><summary>O que acontece se eu quiser aprofundar?</summary><p>Ao final, será apresentada a possibilidade de continuar no Beyond Founders: uma mentoria de 90 dias voltada à construção de identidade, negócio e autoridade. A adesão é opcional e independente do ingresso da masterclass.</p></details></div></div></section>
-<section aria-labelledby="closingTitle" class="bx-closing"><div class="wrap bx-closing-inner"><div class="bx-section-label bx-label-light"><span>23 NOVEMBRO · MASTERCLASS AO VIVO</span></div><h2 id="closingTitle">Você não precisa esperar estar pronta.<em>Já construiu o suficiente para decidir.</em></h2><p>O calendário vai mudar de qualquer maneira. A pergunta é se o seu negócio continuará limitado por uma arquitetura que já não representa a mulher que você se tornou ou se você vai começar a construir outra.</p><p class="bx-closing-highlight">Existe uma vida à altura do seu potencial.<br/>Ela não vai acontecer por acaso.</p><a class="btn bx-btn" href="#oferta">Quero começar minha nova arquitetura <span aria-hidden="true">→</span></a><div class="bx-closing-meta">23 DE NOVEMBRO · ONLINE · EDIÇÃO ÚNICA AO VIVO EM 2026 · AO VIVO R$ 97</div></div></section>
-</main><div class="bx-mobile-sticky"><a aria-label="Escolher ingresso" class="bx-mobile-sticky-cta" href="#selectedCardEyebrow">GARANTIR MINHA VAGA <b aria-hidden="true">→</b></a></div>
+<section aria-labelledby="closingTitle" class="bx-closing"><div class="wrap bx-closing-inner"><div class="bx-section-label bx-label-light"><span>23 NOVEMBRO · MASTERCLASS AO VIVO</span></div><h2 id="closingTitle">Você não precisa esperar estar pronta.<em>Já construiu o suficiente para decidir.</em></h2><p>O calendário vai mudar de qualquer maneira. A pergunta é se o seu negócio continuará limitado por uma arquitetura que já não representa a mulher que você se tornou ou se você vai começar a construir outra.</p><p class="bx-closing-highlight">Existe uma vida à altura do seu potencial.<br/>Ela não vai acontecer por acaso.</p><a class="btn bx-btn" href="#oferta">Garantir minha vaga <span aria-hidden="true">→</span></a><div class="bx-closing-meta">23 DE NOVEMBRO · ONLINE · EDIÇÃO ÚNICA AO VIVO EM 2026 · AO VIVO R$ 97</div></div></section>
+</main><div class="bx-mobile-sticky"><a aria-label="Escolher ingresso" class="bx-mobile-sticky-cta" href="#selectedCardEyebrow">GARANTIR MINHA VAGA <small>· R$ 97</small> <b aria-hidden="true">→</b></a></div>
 <dialog aria-describedby="leadModalSubtitle" aria-labelledby="leadModalTitle" aria-modal="true" class="lead-modal" id="leadModal">
 <div class="lead-modal__top">
 <span class="eyebrow">(B)EYOND CIRCLE / MASTERCLASS</span>
@@ -1125,4 +1204,100 @@ leadForm.addEventListener('submit', async e => {
  }
  window.location.assign(url.toString());
 });
-</script></body></html>
+/* Contador real até o início da masterclass (23/11/2026 20h15, horário de Brasília). */
+(function(){
+ const start=new Date('2026-11-23T20:15:00-03:00').getTime();
+ const els=document.querySelectorAll('[data-countdown]');
+ if(!els.length) return;
+ function render(){
+  const ms=start-Date.now(); let text='';
+  if(ms>0){
+   const days=Math.floor(ms/864e5), hours=Math.floor(ms/36e5);
+   if(days>=2) text='Faltam '+days+' dias para a masterclass';
+   else if(hours>=1) text=hours===1?'Falta 1 hora para a masterclass':'Faltam '+hours+' horas para a masterclass';
+   else text='Começa em menos de 1 hora';
+  }
+  els.forEach(el=>{el.textContent=text; el.hidden=!text;});
+ }
+ render(); setInterval(render,60000);
+})();
+</script><script>
+/* Camada de movimento (mx). Não altera conteúdo nem o fluxo de inscrição. */
+(function(){
+ var d=document, root=d.documentElement;
+ var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+ var hasIO='IntersectionObserver' in window;
+
+ /* Barra fixa do mobile: some enquanto um botão de inscrição da página já está na tela */
+ var sticky=d.querySelector('.bx-mobile-sticky');
+ if(sticky && hasIO){
+  var seen=new Set();
+  var ctaIO=new IntersectionObserver(function(es){
+   es.forEach(function(e){ if(e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+   d.body.classList.toggle('mx-cta-visible', seen.size>0);
+  },{threshold:.6});
+  d.querySelectorAll('main .btn').forEach(function(b){ctaIO.observe(b)});
+ }
+
+ /* Barra de progresso de leitura */
+ var bar=d.createElement('div'); bar.className='mx-progress'; bar.setAttribute('aria-hidden','true'); d.body.appendChild(bar);
+ var ticking=false;
+ function paint(){ ticking=false; var max=root.scrollHeight-window.innerHeight; bar.style.transform='scaleX('+(max>0?Math.min(1,window.scrollY/max):0)+')'; }
+ window.addEventListener('scroll',function(){ if(!ticking){ticking=true;requestAnimationFrame(paint);} },{passive:true});
+ window.addEventListener('resize',paint,{passive:true}); paint();
+
+ /* Troca de ingresso: o preço dá um leve "pop" */
+ var price=d.getElementById('selectedPrice');
+ if(price && !reduce) d.querySelectorAll('input[name="ticket"]').forEach(function(r){ r.addEventListener('change',function(){ price.classList.remove('mx-pop'); void price.offsetWidth; price.classList.add('mx-pop'); }); });
+
+ if(reduce || !hasIO) return;
+
+ /* Revelação ao rolar */
+ var sel=['.bx-proof-grid>div','.bx-section-label','.bx-title','.bx-mirror-intro>div','.bx-pain-grid>article','.bx-editorial-conclusion',
+  '.cv-cta-inner>*','.bx-manifesto-layout>div:first-child>p','.bx-manifesto-quote','.bx-head-split>div','.bx-flow>div','.bx-flow-foot',
+  '.bx-cost-year','.bx-cost-layout>div:last-child>p','.bx-cost-layout .bx-text-link','.bx-deliver-items>*','.bx-map-shell',
+  '.bx-audience-layout>div:first-child>p','.bx-audience-list>div','.ed-portrait','.ed-founder-copy>*','.ed-bridge-head>p','.ed-path>div',
+  '.ed-bridge-note','.bx-offer-head>p','.bx-included','.bx-purchase-card','.bx-faq-list>details','.bx-closing-inner>*'].join(',');
+ var all=[].slice.call(d.querySelectorAll(sel));
+ var vh=window.innerHeight;
+ var items=all.filter(function(el){
+  if(el.closest('.bx-hero')||el.classList.contains('bx-offer-next-arrow')) return false;
+  for(var p=el.parentElement;p;p=p.parentElement) if(all.indexOf(p)>-1) return false;
+  return el.getBoundingClientRect().top>vh*.9;
+ });
+ if(!items.length) return;
+ items.forEach(function(el){el.setAttribute('data-mx','')});
+ root.classList.add('mx');
+ function done(el){ el.removeAttribute('data-mx'); el.classList.remove('mx-in'); el.style.removeProperty('--mx-d'); }
+ var io=new IntersectionObserver(function(es){
+  var perParent=new Map();
+  es.forEach(function(e){
+   if(!e.isIntersecting) return;
+   var el=e.target; io.unobserve(el);
+   var n=perParent.get(el.parentElement)||0; perParent.set(el.parentElement,n+1);
+   var delay=Math.min(n,6)*80;
+   el.style.setProperty('--mx-d',delay+'ms');
+   el.classList.add('mx-in');
+   el.addEventListener('animationend',function h(ev){ if(ev.target===el){el.removeEventListener('animationend',h);done(el);} });
+   setTimeout(function(){ if(el.hasAttribute('data-mx')) done(el); },delay+1400);
+  });
+ },{rootMargin:'0px 0px -7% 0px',threshold:0});
+ items.forEach(function(el){io.observe(el)});
+
+ /* Números de prova: contagem ao entrar na tela */
+ var nums=[].slice.call(d.querySelectorAll('.bx-proof-grid strong,.ed-numbers strong')).filter(function(el){return !el.children.length && /\d/.test(el.textContent)});
+ var numIO=new IntersectionObserver(function(es){
+  es.forEach(function(e){
+   if(!e.isIntersecting) return; var el=e.target; numIO.unobserve(el);
+   var m=el.textContent.match(/^(\D*)(\d+)([\s\S]*)$/); if(!m) return;
+   var end=parseInt(m[2],10), t0=null, dur=1300, finalText=el.textContent;
+   var inl=getComputedStyle(el).display==='inline'; el.style.minWidth=el.getBoundingClientRect().width+'px'; if(inl) el.style.display='inline-block';
+   function step(t){ if(t0===null)t0=t; var k=Math.min(1,(t-t0)/dur), ease=1-Math.pow(1-k,3);
+    el.textContent=k<1?m[1]+Math.round(end*ease)+m[3]:finalText; if(k<1) requestAnimationFrame(step); else {el.style.minWidth=''; if(inl) el.style.display='';} }
+   requestAnimationFrame(step);
+  });
+ },{threshold:.6});
+ nums.forEach(function(el){numIO.observe(el)});
+})();
+</script>
+</body></html>
