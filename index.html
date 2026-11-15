@@ -1099,6 +1099,16 @@ body.mx-cta-visible .bx-mobile-sticky{transform:translateY(120%);opacity:0;point
 /* CONFIGURAÇÃO PARA PUBLICAÇÃO: conectar APENAS URLs HTTPS oficiais. */
 const CONFIG = { checkoutAoVivoUrl: 'https://pay.simplles.com/yqVisC1lOAogNPhc?offerCode=JtRRmdlo', checkoutComGravacaoUrl: 'https://pay.simplles.com/yqVisC1lOAogNPhc?offerCode=QrB0zRof', webhookUrl: '' };
 const $ = (id) => document.getElementById(id);
+function currentTicket(){ return document.querySelector('input[name="ticket"]:checked')?.value || 'ao_vivo'; }
+function priceForTicket(ticket){ return ticket === 'com_gravacao' ? 147 : 97; }
+function updateTicketUI(){
+  const ticket=currentTicket();
+  const value=priceForTicket(ticket);
+  document.getElementById('selectedPrice').textContent=String(value);
+  document.getElementById('selectedCardHelp').textContent=ticket==='com_gravacao'
+    ? 'Inclui tudo do ingresso ao vivo e a gravação, disponibilizada em até 7 dias após a masterclass.'
+    : 'Participação ao vivo, workbook, Mapa de Arquitetura 2027™ e plano de ação de 7 dias.';
+}
 function checkoutUrlFor(ticket){
   const selectedCheckout = ticket === 'com_gravacao' ? CONFIG.checkoutComGravacaoUrl : CONFIG.checkoutAoVivoUrl;
   const url = new URL(selectedCheckout);
